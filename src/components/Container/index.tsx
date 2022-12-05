@@ -8,7 +8,7 @@ type Props = {} & FlexProps;
 const Container = ({ children, ...props }: Props) => {
   const { isBigScreen } = useResponsive();
   return (
-    <Flex maxW={isBigScreen ? '95vw' : '90vw'} margin='0 auto' {...props}>
+    <Flex w={isBigScreen ? '95vw' : '90vw'} margin='0 auto' {...props}>
       {children}
     </Flex>
   );
