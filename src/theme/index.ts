@@ -24,6 +24,13 @@ const theme = extendTheme({
         padding: 0,
         margin: 0,
         'scroll-behavior': 'smooth',
+        background: '#FAF8ED',
+        minHeight: '100vh',
+      },
+    },
+    Text: {
+      baseStyle: {
+        color: '#2D3134',
       },
     },
   },
