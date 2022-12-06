@@ -41,7 +41,7 @@ const Nav = (props: Props) => {
       w='full'
       h='72px'
       background={isTop ? 'transparent' : '#FAEEAB'}
-      zIndex={1}
+      zIndex={99}
     >
       <Container justifyContent='space-between' alignItems='center'>
         <Flex alignItems='center'>

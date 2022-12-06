@@ -45,7 +45,7 @@ const categories: CategoryType[] = [
 const Section2 = ({ ...props }: Props) => {
   return (
     <Flex direction='column' {...props}>
-      <Text fontSize='56px' fontWeight={500}>
+      <Text fontSize='56px' fontWeight='semibold'>
         Categories
       </Text>
       <Text
@@ -69,6 +69,7 @@ const Section2 = ({ ...props }: Props) => {
         modules={[Autoplay]}
         loop
         centeredSlides
+        grabCursor
         className='mySwiper'
       >
         {categories.map((item) => (
