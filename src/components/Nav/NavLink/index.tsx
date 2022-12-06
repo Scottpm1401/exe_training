@@ -1,4 +1,4 @@
-import { Button, ButtonProps, ColorProps, Text } from '@chakra-ui/react';
+import { Button, ButtonProps, ColorProps, Flex, Text } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -14,17 +14,34 @@ const NavLink = ({ title, href, textColor, ...props }: NavLinkType) => {
     <Button
       css={css`
         &:not(last-child) {
-          margin-right: 0.5rem;
+          margin-right: 2rem;
+        }
+        &:hover .underline {
+          width: 100%;
         }
       `}
-      variant='ghost'
-      colorScheme='blackAlpha'
+      variant='unstyled'
       {...props}
     >
-      <Link to={href}>
+      <Link
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        to={href}
+      >
         <Text fontWeight='medium' color={textColor ?? '#2E476B'}>
           {title}
         </Text>
+        <Flex
+          className='underline'
+          h='2px'
+          w='0px'
+          transition='all 300ms ease-in-out'
+          background='#F66F4D'
+        />
       </Link>
     </Button>
   );
