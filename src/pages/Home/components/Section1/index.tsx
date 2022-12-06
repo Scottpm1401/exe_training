@@ -89,9 +89,9 @@ const Section1 = ({ ...props }: Props) => {
         </Flex>
       </Flex>
       <Flex w='469px' h='555px' position='relative'>
-        <Image src='/image/banner_1.png' fit='contain' />
+        <Image src='/image/banner/banner_1.png' fit='contain' />
         <Flex w='149px' h='160px' position='absolute' bottom='0' left='-58px'>
-          <Image src='/image/banner_1_card.png' fit='contain' />
+          <Image src='/image/banner/banner_1_card.png' fit='contain' />
         </Flex>
       </Flex>
     </Flex>

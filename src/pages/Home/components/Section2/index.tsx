@@ -18,27 +18,27 @@ export type CategoryType = {
 const categories: CategoryType[] = [
   {
     title: 'Beach',
-    img: '/image/beach.png',
+    img: '/image/categories/beach.png',
   },
   {
     title: 'Desert',
-    img: '/image/desert.png',
+    img: '/image/categories/desert.png',
   },
   {
     title: 'Mountain',
-    img: '/image/mountain.png',
+    img: '/image/categories/mountain.png',
   },
   {
     title: 'Temple',
-    img: '/image/temple.png',
+    img: '/image/categories/temple.png',
   },
   {
     title: 'Tower',
-    img: '/image/tower.png',
+    img: '/image/categories/tower.png',
   },
   {
     title: 'Pyramid',
-    img: '/image/pyramid.png',
+    img: '/image/categories/pyramid.png',
   },
 ];
 
