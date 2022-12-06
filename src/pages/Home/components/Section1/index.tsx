@@ -32,7 +32,7 @@ const Section1 = ({ ...props }: Props) => {
           mt='2.5rem'
         >
           <Flex direction='column' pr='34px' borderRight='1px solid #EAEAEB'>
-            <Text fontWeight={500} fontSize='18px'>
+            <Text fontWeight='semibold' fontSize='18px'>
               Where
             </Text>
             <Flex alignItems='center'>
@@ -59,7 +59,7 @@ const Section1 = ({ ...props }: Props) => {
             w='full'
           >
             <Flex direction='column'>
-              <Text fontWeight={500} fontSize='18px'>
+              <Text fontWeight='semibold' fontSize='18px'>
                 Date
               </Text>
               <Flex alignItems='center'>

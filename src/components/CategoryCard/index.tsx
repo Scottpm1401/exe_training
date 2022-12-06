@@ -40,7 +40,7 @@ const CategoryCard = ({ img, title, href, ...props }: CategoryCardType) => {
           </Text>
         </Button>
       </Flex>
-      <Text mt='1rem' fontSize='26px' fontWeight={500}>
+      <Text mt='1rem' fontSize='26px' fontWeight='semibold'>
         {title}
       </Text>
     </Flex>
