@@ -15,7 +15,7 @@ const Section3 = ({ ...props }: Props) => {
       {...props}
     >
       <Flex position='relative' w='490px' h='562px'>
-        <Image src='/image/banner_2.png' fit='contain' />
+        <Image src='/image/banner/banner_2.png' fit='contain' />
         <Flex
           w='140px'
           h='218px'
@@ -23,10 +23,10 @@ const Section3 = ({ ...props }: Props) => {
           bottom='86px'
           left='-58px'
         >
-          <Image src='/image/banner_2_card_1.png' fit='contain' />
+          <Image src='/image/banner/banner_2_card_1.png' fit='contain' />
         </Flex>
         <Flex w='171px' h='92px' position='absolute' bottom='-18px' right='0px'>
-          <Image src='/image/banner_2_card_2.png' fit='contain' />
+          <Image src='/image/banner/banner_2_card_2.png' fit='contain' />
         </Flex>
       </Flex>
       <Flex direction='column'>

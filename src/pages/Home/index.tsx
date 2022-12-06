@@ -1,10 +1,12 @@
-import { Flex } from '@chakra-ui/react';
+import 'swiper/css';
+
 import React from 'react';
 
 import Container from '../../components/Container';
 import Section1 from './components/Section1';
 import Section2 from './components/Section2';
 import Section3 from './components/Section3';
+import Section4 from './components/Section4';
 
 type Props = {};
 
@@ -14,6 +16,7 @@ const Home = (props: Props) => {
       <Section1 />
       <Section2 />
       <Section3 />
+      <Section4 />
     </Container>
   );
 };
