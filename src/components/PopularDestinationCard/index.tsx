@@ -13,6 +13,7 @@ const PopularDestinationCard = ({
   href,
   price,
   img,
+  id,
   ...props
 }: Props) => {
   return (

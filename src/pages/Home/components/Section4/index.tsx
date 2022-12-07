@@ -4,12 +4,14 @@ import React, { useState } from 'react';
 import SVG from 'react-inlinesvg';
 import { Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { v4 as uuidv4 } from 'uuid';
 
 import PopularDestinationCard from '../../../../components/PopularDestinationCard';
 
 type Props = {} & FlexProps;
 
 export type PopularDestinationType = {
+  id: string;
   img: string;
   title: string;
   des: string;
@@ -19,24 +21,28 @@ export type PopularDestinationType = {
 
 const popularDestinations: PopularDestinationType[] = [
   {
+    id: uuidv4(),
     img: '/image/popular_des/hiking_tour.png',
     title: 'Mountain Hiking Tour',
     des: 'Mountain Hiking Tour',
     price: 89,
   },
   {
+    id: uuidv4(),
     img: '/image/popular_des/machu_picchu.png',
     title: 'Machu Picchu, Peru',
     des: 'Machu Picchu, Peru',
     price: 99,
   },
   {
+    id: uuidv4(),
     img: '/image/popular_des/the_grand_canyon.png',
     title: 'The Grand Canyon, Arizona',
     des: 'The Grand Canyon, Arizona',
     price: 70,
   },
   {
+    id: uuidv4(),
     img: '/image/popular_des/rome.jpg',
     title: 'Rome, Italy',
     des: 'Rome, Italy',
@@ -118,13 +124,14 @@ const Section4 = ({ ...props }: Props) => {
         className='mySwiper'
       >
         {popularDestinations.map((item) => (
-          <SwiperSlide style={{ width: 386 }} key={item.title}>
+          <SwiperSlide style={{ width: 386 }} key={item.id}>
             <PopularDestinationCard
               img={item.img}
               title={item.title}
               price={item.price}
               href={item.href}
               des={item.des}
+              id={item.id}
             />
           </SwiperSlide>
         ))}
