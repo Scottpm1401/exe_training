@@ -5,7 +5,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Nav from './components/Nav';
+import Footer from './layout/Footer';
+import Nav from './layout/Nav';
 import Home from './pages/Home';
 import theme from './theme';
 
@@ -21,6 +22,7 @@ root.render(
         <Routes>
           <Route path='/' element={<Home />} />
         </Routes>
+        <Footer />
       </Router>
     </ChakraProvider>
   </React.StrictMode>
