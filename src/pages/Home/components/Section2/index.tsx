@@ -4,42 +4,26 @@ import { Flex, FlexProps, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { v4 as uuidv4 } from 'uuid';
 
 import CategoryCard from '../../../../components/CategoryCard';
 
 type Props = {} & FlexProps;
 
 export type CategoryType = {
+  id: string;
   title: string;
   img: string;
   href?: string;
 };
 
 const categories: CategoryType[] = [
-  {
-    title: 'Beach',
-    img: '/image/categories/beach.png',
-  },
-  {
-    title: 'Desert',
-    img: '/image/categories/desert.png',
-  },
-  {
-    title: 'Mountain',
-    img: '/image/categories/mountain.png',
-  },
-  {
-    title: 'Temple',
-    img: '/image/categories/temple.png',
-  },
-  {
-    title: 'Tower',
-    img: '/image/categories/tower.png',
-  },
-  {
-    title: 'Pyramid',
-    img: '/image/categories/pyramid.png',
-  },
+  { id: uuidv4(), title: 'Beach', img: '/image/categories/beach.png' },
+  { id: uuidv4(), title: 'Desert', img: '/image/categories/desert.png' },
+  { id: uuidv4(), title: 'Mountain', img: '/image/categories/mountain.png' },
+  { id: uuidv4(), title: 'Temple', img: '/image/categories/temple.png' },
+  { id: uuidv4(), title: 'Tower', img: '/image/categories/tower.png' },
+  { id: uuidv4(), title: 'Pyramid', img: '/image/categories/pyramid.png' },
 ];
 
 const Section2 = ({ ...props }: Props) => {
@@ -73,8 +57,8 @@ const Section2 = ({ ...props }: Props) => {
         className='mySwiper'
       >
         {categories.map((item) => (
-          <SwiperSlide style={{ width: 170 }} key={item.title}>
-            <CategoryCard title={item.title} img={item.img} />
+          <SwiperSlide style={{ width: 170 }} key={item.id}>
+            <CategoryCard title={item.title} img={item.img} id={item.id} />
           </SwiperSlide>
         ))}
       </Swiper>
