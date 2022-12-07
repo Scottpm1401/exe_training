@@ -7,7 +7,7 @@ import { useResponsive } from '../../../../hooks/useResponsive';
 type Props = {} & FlexProps;
 
 const Section1 = ({ ...props }: Props) => {
-  const { isMobileOrTablet } = useResponsive();
+  const { isMobileOrTablet, is2XLScreen, is3XLScreen } = useResponsive();
   return (
     <Flex
       id='section1'
@@ -17,11 +17,14 @@ const Section1 = ({ ...props }: Props) => {
       gap='2rem'
       {...props}
     >
-      <Flex direction='column' maxW='557px'>
+      <Flex
+        direction='column'
+        maxW={is3XLScreen ? '808px' : is2XLScreen ? '728px' : '557px'}
+      >
         <Text fontSize='84px' fontWeight='bold' lineHeight='86px'>
           Discover the Best Lovely Places
         </Text>
-        <Text mt='1.5rem'>
+        <Text mt='1.5rem' maxW='500px'>
           Plan and book your perfect trip with expert advice, travel tips,
           destination information and inspiration from us.
         </Text>
@@ -30,6 +33,7 @@ const Section1 = ({ ...props }: Props) => {
           background='#FDFEFF'
           padding='11px 20px 11px 28px'
           mt='2.5rem'
+          maxW='500px'
         >
           <Flex direction='column' pr='34px' borderRight='1px solid #EAEAEB'>
             <Text fontWeight='semibold' fontSize='18px'>
