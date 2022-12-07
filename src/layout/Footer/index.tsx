@@ -1,4 +1,4 @@
-import { Button, Flex, FlexProps, Grid, Image, Text } from '@chakra-ui/react';
+import { Button, Flex, FlexProps, Grid, Text } from '@chakra-ui/react';
 import React from 'react';
 import SVG from 'react-inlinesvg';
 

@@ -41,7 +41,6 @@
     ]
   },
   "devDependencies": {
-    "@emotion/babel-plugin": "^11.10.5",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",

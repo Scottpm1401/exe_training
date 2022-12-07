@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Flex } from '@chakra-ui/react';
+import { Button, ButtonProps } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import React from 'react';
 import SVG from 'react-inlinesvg';
