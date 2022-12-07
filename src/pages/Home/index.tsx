@@ -2,7 +2,7 @@ import 'swiper/css';
 
 import React from 'react';
 
-import Container from '../../components/Container';
+import Container from '../../layout/Container';
 import NewSletter from './components/NewSletter';
 import Section1 from './components/Section1';
 import Section2 from './components/Section2';
