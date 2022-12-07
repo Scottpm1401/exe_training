@@ -7,9 +7,16 @@ type NavLinkType = {
   title: string;
   href: string;
   textColor?: ColorProps['color'];
+  direction?: 'left' | 'center';
 } & ButtonProps;
 
-const NavLink = ({ title, href, textColor, ...props }: NavLinkType) => {
+const NavLink = ({
+  title,
+  href,
+  textColor,
+  direction = 'center',
+  ...props
+}: NavLinkType) => {
   return (
     <Button
       css={css`
@@ -20,6 +27,8 @@ const NavLink = ({ title, href, textColor, ...props }: NavLinkType) => {
           width: 100%;
         }
       `}
+      display='flex'
+      justifyContent={direction === 'center' ? 'center' : 'flex-start'}
       variant='unstyled'
       {...props}
     >
@@ -27,8 +36,8 @@ const NavLink = ({ title, href, textColor, ...props }: NavLinkType) => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: direction === 'center' ? 'center' : 'flex-start',
+          alignItems: direction === 'center' ? 'center' : 'flex-start',
         }}
         to={href}
       >
