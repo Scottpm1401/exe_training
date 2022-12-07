@@ -2,10 +2,12 @@ import { Flex, FlexProps, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 
 import ExpCard from '../../../../components/ExpCard';
+import { useResponsive } from '../../../../hooks/useResponsive';
 
 type Props = {} & FlexProps;
 
 const Section3 = ({ ...props }: Props) => {
+  const { isMobileOrTablet, is2XLScreen, is3XLScreen } = useResponsive();
   return (
     <Flex
       w='full'
@@ -30,7 +32,10 @@ const Section3 = ({ ...props }: Props) => {
         </Flex>
       </Flex>
       <Flex direction='column'>
-        <Flex direction='column' maxW='467px'>
+        <Flex
+          direction='column'
+          maxW={is3XLScreen ? '684px' : is2XLScreen ? '569px' : '467px'}
+        >
           <Text
             color='#F66F4D'
             fontSize='1.25rem'
