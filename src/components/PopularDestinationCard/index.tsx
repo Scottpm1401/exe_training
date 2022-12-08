@@ -22,6 +22,7 @@ const PopularDestinationCard = ({
       borderRadius='1rem'
       border='2px solid #FFFFFF'
       p='12px 12px 36px 12px'
+      boxShadow='0px 6px 12px rgba(192, 188, 161, 0.22)'
       {...props}
     >
       <Flex
@@ -31,11 +32,10 @@ const PopularDestinationCard = ({
           }
         `}
         position='relative'
-        w='362px'
+        w='full'
         h='252px'
-        borderRadius='1rem'
       >
-        <Image src={img} fit='cover' />
+        <Image borderRadius='1rem' src={img} fit='cover' />
         <Button
           className='card_hover'
           variant='unstyled'

@@ -1,4 +1,11 @@
-import { Button, ButtonProps, ColorProps, Flex, Text } from '@chakra-ui/react';
+import {
+  Button,
+  ButtonProps,
+  ColorProps,
+  Flex,
+  Text,
+  TextProps,
+} from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -6,14 +13,14 @@ import { Link } from 'react-router-dom';
 type NavLinkType = {
   title: string;
   href: string;
-  textColor?: ColorProps['color'];
+  textProps?: TextProps;
   direction?: 'left' | 'center';
 } & ButtonProps;
 
 const NavLink = ({
   title,
   href,
-  textColor,
+  textProps,
   direction = 'center',
   ...props
 }: NavLinkType) => {
@@ -41,7 +48,7 @@ const NavLink = ({
         }}
         to={href}
       >
-        <Text fontWeight='medium' color={textColor ?? '#2E476B'}>
+        <Text fontWeight='medium' color='#2E476B' {...textProps}>
           {title}
         </Text>
         <Flex

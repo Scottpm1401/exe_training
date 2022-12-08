@@ -1,5 +1,4 @@
 import { Flex, FlexProps, Text } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 
 type ExpCardType = {
   title: string;
@@ -9,11 +8,6 @@ type ExpCardType = {
 const ExpCard = ({ title, des, ...props }: ExpCardType) => {
   return (
     <Flex
-      css={css`
-        &:not(:first-child) {
-          margin-left: 20px;
-        }
-      `}
       borderRadius='2xl'
       w='166px'
       background='rgba(255,255,255,0.7)'

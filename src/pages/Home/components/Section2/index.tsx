@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuidv4 } from 'uuid';
 
 import CategoryCard from '../../../../components/CategoryCard';
+import { useResponsive } from '../../../../hooks/useResponsive';
 
 type Props = {} & FlexProps;
 
@@ -27,14 +28,25 @@ const categories: CategoryType[] = [
 ];
 
 const Section2 = ({ ...props }: Props) => {
+  const { isMobileOrTablet } = useResponsive();
   return (
-    <Flex direction='column' {...props}>
-      <Text fontSize='56px' fontWeight='semibold'>
+    <Flex
+      mt={isMobileOrTablet ? '110px' : '40px'}
+      direction='column'
+      textAlign={isMobileOrTablet ? 'center' : 'left'}
+      alignItems={isMobileOrTablet ? 'center' : 'flex-start'}
+      {...props}
+    >
+      <Text
+        fontSize={isMobileOrTablet ? '34px' : '56px'}
+        fontWeight={isMobileOrTablet ? 'bold' : 'semibold'}
+        lineHeight={isMobileOrTablet ? '44.2px' : '56px'}
+      >
         Categories
       </Text>
       <Text
-        mt='1rem'
         maxW='370px'
+        mt='1rem'
         fontSize='md'
         fontWeight='medium'
         color='#5B5F62'
@@ -42,6 +54,7 @@ const Section2 = ({ ...props }: Props) => {
         Here are lots of interesting destinations to visit, but don’t be
         confused—they’re already grouped by category.
       </Text>
+
       <Swiper
         style={{ width: '100%', marginTop: '40px' }}
         slidesPerView='auto'
