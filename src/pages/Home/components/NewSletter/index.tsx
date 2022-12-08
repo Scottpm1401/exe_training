@@ -2,9 +2,12 @@ import { Button, Flex, FlexProps, Image, Input, Text } from '@chakra-ui/react';
 import React from 'react';
 import SVG from 'react-inlinesvg';
 
+import { useResponsive } from '../../../../hooks/useResponsive';
+
 type Props = {} & FlexProps;
 
 const NewSletter = ({ ...props }: Props) => {
+  const { isMobile } = useResponsive();
   return (
     <Flex
       position='relative'
@@ -12,7 +15,9 @@ const NewSletter = ({ ...props }: Props) => {
       background='#FFD482'
       borderRadius='30px'
       w='full'
-      h='358px'
+      h={isMobile ? '392px' : '358px'}
+      p={isMobile ? '24px' : '0px'}
+      textAlign={isMobile ? 'center' : 'left'}
       {...props}
     >
       <Flex
@@ -35,7 +40,7 @@ const NewSletter = ({ ...props }: Props) => {
       >
         <Text
           fontWeight='semibold'
-          fontSize='40px'
+          fontSize={isMobile ? '32px' : '40px'}
           lineHeight='40px'
           letterSpacing='0.0015em'
         >
@@ -58,15 +63,14 @@ const NewSletter = ({ ...props }: Props) => {
             color: '#5B5F62',
           }}
           fontSize='14px'
-          mt='40px'
-          w='450px'
+          mt={isMobile ? '80px' : '40px'}
+          w={isMobile ? 'full' : '450px'}
           background='white'
           padding='10px 12px'
           borderRadius='12px'
         >
           <Input
             variant='unstyled'
-            pr='40px'
             pl='14px'
             placeholder='Enter Your Email Address'
           />

@@ -3,19 +3,25 @@ import { css } from '@emotion/react';
 import React from 'react';
 import SVG from 'react-inlinesvg';
 
+import { useResponsive } from '../../../../hooks/useResponsive';
+
 type Props = {} & GridProps;
 
 const Section6 = ({ ...props }: Props) => {
+  const { isMobileOrTablet } = useResponsive();
   return (
     <Grid
-      templateColumns='1fr 1fr'
+      templateColumns={isMobileOrTablet ? 'auto' : '1fr 1fr'}
       justifyContent='center'
       mt='132px'
       {...props}
     >
-      <Flex justifyContent='center'>
-        <Image src='/image/banner/banner_3.png' fit='contain' />
-      </Flex>
+      {!isMobileOrTablet && (
+        <Flex justifyContent='center'>
+          <Image src='/image/banner/banner_3.png' fit='contain' />
+        </Flex>
+      )}
+
       <Flex direction='column'>
         <Flex
           w='67px'
@@ -24,11 +30,16 @@ const Section6 = ({ ...props }: Props) => {
           background='linear-gradient(159.99deg, #FFD482 13.35%, #FFBE82 118.92%)'
           boxShadow='0px 2px 6px rgba(229, 137, 24, 0.15)'
         />
-        <Text mt='12px' fontSize='56px' fontWeight='semibold' lineHeight='66px'>
+        <Text
+          mt={isMobileOrTablet ? '0px' : '12px'}
+          fontSize={isMobileOrTablet ? '36px' : '56px'}
+          fontWeight='semibold'
+          lineHeight='66px'
+        >
           A Customer Said About Us:
         </Text>
         <Flex
-          mt='26px'
+          mt={isMobileOrTablet ? '0px' : '26px'}
           direction='column'
           borderRadius='14px'
           background='white'

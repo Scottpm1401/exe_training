@@ -10,26 +10,42 @@ const Section3 = ({ ...props }: Props) => {
   const { isMobileOrTablet, is2XLScreen, is3XLScreen } = useResponsive();
   return (
     <Flex
+      direction={isMobileOrTablet ? 'column-reverse' : 'row'}
       w='full'
       alignItems='center'
       justifyContent='space-between'
-      mt='230px'
+      mt={isMobileOrTablet ? '80px' : '230px'}
       {...props}
     >
-      <Flex position='relative' w='490px' h='562px'>
+      <Flex
+        position='relative'
+        w={isMobileOrTablet ? '327px' : '490px'}
+        h={isMobileOrTablet ? '358px' : '562px'}
+        mt={isMobileOrTablet ? '22px' : '0px'}
+      >
         <Image src='/image/banner/banner_2.png' fit='contain' />
-        <Flex
-          w='140px'
-          h='218px'
-          position='absolute'
-          bottom='86px'
-          left='-58px'
-        >
-          <Image src='/image/banner/banner_2_card_1.png' fit='contain' />
-        </Flex>
-        <Flex w='171px' h='92px' position='absolute' bottom='-18px' right='0px'>
-          <Image src='/image/banner/banner_2_card_2.png' fit='contain' />
-        </Flex>
+        {!isMobileOrTablet && (
+          <>
+            <Flex
+              w='140px'
+              h='218px'
+              position='absolute'
+              bottom='86px'
+              left='-58px'
+            >
+              <Image src='/image/banner/banner_2_card_1.png' fit='contain' />
+            </Flex>
+            <Flex
+              w='171px'
+              h='92px'
+              position='absolute'
+              bottom='-18px'
+              right='0px'
+            >
+              <Image src='/image/banner/banner_2_card_2.png' fit='contain' />
+            </Flex>
+          </>
+        )}
       </Flex>
       <Flex direction='column'>
         <Flex
@@ -46,7 +62,7 @@ const Section3 = ({ ...props }: Props) => {
           </Text>
           <Text
             mt='1rem'
-            fontSize='56px'
+            fontSize={isMobileOrTablet ? '36px' : '56px'}
             fontWeight='semibold'
             lineHeight='66px'
           >
@@ -58,10 +74,27 @@ const Section3 = ({ ...props }: Props) => {
             your adventure now! Nature has already called you!
           </Text>
         </Flex>
-        <Flex mt='2.5rem'>
-          <ExpCard title='12K+' des='Success Journey' />
-          <ExpCard title='16+' des='Awards Winning' />
-          <ExpCard title='20+' des='Years Of Experience' />
+        <Flex mt='2.5rem' direction={isMobileOrTablet ? 'column' : 'row'}>
+          <Flex w='full'>
+            <ExpCard
+              title='12K+'
+              des='Success Journey'
+              w={isMobileOrTablet ? 'full' : 'initial'}
+            />
+            <ExpCard
+              title='16+'
+              des='Awards Winning'
+              w={isMobileOrTablet ? 'full' : 'initial'}
+              ml={isMobileOrTablet ? '14px' : '20px'}
+            />
+          </Flex>
+          <ExpCard
+            title='20+'
+            des='Years Of Experience'
+            w={isMobileOrTablet ? 'full' : 'initial'}
+            ml={isMobileOrTablet ? '0px' : '20px'}
+            mt={isMobileOrTablet ? '14px' : '0px'}
+          />
         </Flex>
       </Flex>
     </Flex>
