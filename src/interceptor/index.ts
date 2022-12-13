@@ -2,6 +2,9 @@ import axios from 'axios';
 import moment from 'moment';
 
 import { API } from '../api';
+import { actions } from '../redux/reducers';
+import { AuthState } from '../redux/reducers/authReducer';
+import { store } from '../redux/store';
 
 const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_BE_URL,
@@ -10,11 +13,10 @@ const axiosClient = axios.create({
 });
 
 // Add a request interceptor
-axios.interceptors.request.use(
+axiosClient.interceptors.request.use(
   async (config) => {
     if (typeof window !== 'undefined') {
-      const expiredDate = await localStorage.getItem('expiredDate');
-
+      const { accessToken, expiredDate }: AuthState = store.getState().auth;
       if (expiredDate === null) {
         return config;
       }
@@ -22,7 +24,6 @@ axios.interceptors.request.use(
       // Date.now() is in milliseconds expires is in seconds
       // tslint:disable-next-line:radix
       if (moment().isBefore(expiredDate)) {
-        const accessToken = await localStorage.getItem('accessToken');
         config.headers = {
           ...config.headers,
           Authorization: `Bearer ${accessToken}`,
@@ -39,14 +40,14 @@ axios.interceptors.request.use(
 );
 
 // Add a response interceptor
-axios.interceptors.response.use(
+axiosClient.interceptors.response.use(
   (response) => {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response;
   },
   async (err) => {
-    const refreshToken = await localStorage.getItem('refreshToken');
+    const { refreshToken }: AuthState = store.getState().auth;
     if (!refreshToken) {
       return Promise.reject(err);
     }
@@ -65,8 +66,13 @@ axios.interceptors.response.use(
               baseURL: process.env.REACT_APP_BE_URL,
             }
           );
-          await localStorage.setItem('accessToken', data.accessToken);
-          await localStorage.setItem('expires', data.expiredAt);
+          store.dispatch(
+            actions.auth.setAuth({
+              accessToken: data.accessToken,
+              expiredDate: data.expiredDate,
+              refreshToken,
+            })
+          );
 
           originalConfig.headers = {
             ...originalConfig.headers,

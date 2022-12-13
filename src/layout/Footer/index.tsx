@@ -12,7 +12,7 @@ type Props = {} & FlexProps;
 const Footer = ({ ...props }: Props) => {
   const { isMobile, is3XLScreen, is2XLScreen } = useResponsive();
   return (
-    <Flex mt='145px' mb='80px' {...props}>
+    <Flex mb='80px' {...props}>
       <Container
         direction={isMobile ? 'column' : 'row'}
         justifyContent='space-between'

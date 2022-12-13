@@ -12,6 +12,7 @@ const NewSletter = ({ ...props }: Props) => {
     <Flex
       position='relative'
       mt='124px'
+      mb='145px'
       background='#FFD482'
       borderRadius='30px'
       w='full'

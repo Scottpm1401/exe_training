@@ -1,26 +1,33 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Button, Flex, Input, Link, Text } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import React from 'react';
+import { Link as ReactLink } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import { API } from '../../../api';
-import axiosClient from '../../../interceptor';
+import { LoginRequest } from '../../../models/api/user';
+import { useAppDispatch } from '../../../redux/hooks';
+import { actions } from '../../../redux/reducers';
+import { login } from '../../../services/auth';
+import { getProfile } from '../../../services/user';
 import { validateEmail } from '../../../utils/common';
 
-type Props = {};
+type LoginFormType = {
+  userinput: string;
+  password: string;
+};
+
+const initValue: LoginFormType = { userinput: '', password: '' };
 
 const LoginSchema = Yup.object().shape({
-  userinput: Yup.string().required(),
-  password: Yup.string().required(),
+  userinput: Yup.string().required('Please enter username or email'),
+  password: Yup.string().required('Please enter password'),
 });
 
-const LoginForm = (props: Props) => {
-  const handleLogin = async (values: {
-    userinput: string;
-    password: string;
-  }) => {
+const LoginForm = () => {
+  const dispatch = useAppDispatch();
+  const handleLogin = async (values: LoginFormType) => {
     const { userinput, password } = values;
-    const loginReq = validateEmail(values.userinput)
+    const loginReq: LoginRequest = validateEmail(values.userinput)
       ? {
           email: userinput,
           password,
@@ -29,37 +36,67 @@ const LoginForm = (props: Props) => {
           username: userinput,
           password,
         };
-    const res = await axiosClient.post(API.USER.LOGIN, loginReq);
-    console.log(res.data);
+    const data = await login(loginReq);
+    dispatch(actions.auth.setAuth(data));
+    const userProfile = await getProfile();
+    dispatch(actions.user.setUser(userProfile));
   };
 
   return (
-    <Flex w='full' h='full' alignItems='center' justifyContent='center'>
+    <Flex
+      w='full'
+      borderRadius='0.5rem'
+      background='white'
+      p='1.5rem 1rem'
+      alignItems='center'
+      justifyContent='center'
+    >
       <Formik
         validationSchema={LoginSchema}
-        initialValues={{ userinput: '', password: '' }}
+        initialValues={initValue}
         onSubmit={handleLogin}
       >
         {({ handleSubmit, handleChange, values, errors, touched }) => (
-          <Flex direction='column'>
+          <Flex direction='column' w='full'>
             <Text>Username or email address</Text>
             <Input
+              mt='0.5rem'
               value={values.userinput}
               onChange={handleChange('userinput')}
             />
             {errors.userinput && touched.userinput && (
-              <Text>{errors.userinput}</Text>
+              <Text fontSize='smaller' color='red'>
+                {errors.userinput}
+              </Text>
             )}
-            <Text>Password</Text>
+            <Flex
+              mt='0.5rem'
+              justifyContent='space-between'
+              alignItems='center'
+            >
+              <Text>Password</Text>
+              <Link color='blue' fontSize='smaller' as={ReactLink} to='#'>
+                Forgot password?
+              </Link>
+            </Flex>
             <Input
+              mt='0.5rem'
               type='password'
               value={values.password}
               onChange={handleChange('password')}
             />
             {errors.password && touched.password && (
-              <Text>{errors.password}</Text>
+              <Text fontSize='smaller' color='red'>
+                {errors.password}
+              </Text>
             )}
-            <Button onClick={() => handleSubmit()}>Login</Button>
+            <Button
+              colorScheme='orange'
+              mt='1rem'
+              onClick={() => handleSubmit()}
+            >
+              Sign in
+            </Button>
           </Flex>
         )}
       </Formik>
