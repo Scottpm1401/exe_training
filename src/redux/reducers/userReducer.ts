@@ -1,14 +1,21 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { UserType } from '../../models/user';
+import { UserInfoType } from '../../models/user';
 
-export type UserState = {} & UserType;
+export type UserState = {
+  _id: string;
+  displayName?: string;
+  email: string;
+  username: string;
+  role: 'ADMIN' | 'USER';
+  birthday: string;
+  info?: UserInfoType;
+};
 // Initial state
 const initialState: UserState = {
   _id: '',
   email: '',
   username: '',
-  password: '',
   role: 'USER',
   birthday: '',
 };
@@ -20,8 +27,16 @@ export const { actions, reducer } = createSlice({
   reducers: {
     // Action to set the authentication status
     setUser(state, action: PayloadAction<UserState>) {
-      state = action.payload;
+      state._id = action.payload._id;
+      state.birthday = action.payload.birthday;
+      state.displayName = action.payload.displayName;
+      state.email = action.payload.email;
+      state.info = action.payload.info;
+      state.role = action.payload.role;
+      state.username = action.payload.username;
     },
+
+    reset: () => initialState,
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
   },

@@ -9,6 +9,7 @@ type Props = {};
 const Login = (props: Props) => {
   return (
     <Flex
+      marginY='5rem'
       minHeight='70vh'
       alignItems='center'
       justifyContent='center'

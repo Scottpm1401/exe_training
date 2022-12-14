@@ -1,35 +1,52 @@
 import {
+  Avatar,
   Button,
   Drawer,
   DrawerContent,
   DrawerOverlay,
   Flex,
   FlexProps,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import SVG from 'react-inlinesvg';
+import { Link } from 'react-router-dom';
 
 import SocialIcon from '../../components/SocialIcon';
 import { useResponsive } from '../../hooks/useResponsive';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { actions, selectors } from '../../redux/reducers';
+import { logout } from '../../services/auth';
 import Container from '../Container';
 import NavLink from './NavLink';
 
 type Props = {} & FlexProps;
 
-const OFFSET = 40;
+const OFFSET = 20;
 
 const Nav = (props: Props) => {
   const { isMobileOrTablet } = useResponsive();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isPopoverOpen,
+    onToggle: onPopoverToggle,
+    onClose: onPopoverClose,
+  } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement | null>(null);
+  const user = useAppSelector(selectors.user.selectUser);
+  const refreshToken = useAppSelector(selectors.auth.selectRefreshToken);
+  const dispatch = useAppDispatch();
 
   const [isTop, setIsTop] = useState(true);
+
   const scrollEvent = useCallback(() => {
-    const section1 = document.getElementById('section1');
-    if (section1) {
-      const rect = section1.getBoundingClientRect();
+    const body = document.body;
+    if (body) {
+      const rect = body.getBoundingClientRect();
       if (rect.top <= -OFFSET) {
         setIsTop(false);
       } else {
@@ -37,6 +54,18 @@ const Nav = (props: Props) => {
       }
     }
   }, []);
+
+  const handleLogout = async () => {
+    if (refreshToken) {
+      const data = await logout({ refreshToken });
+      if (data.success) {
+        dispatch(actions.auth.reset());
+        dispatch(actions.user.reset());
+      }
+    }
+
+    onPopoverToggle();
+  };
 
   useEffect(() => {
     if (document) {
@@ -60,14 +89,17 @@ const Nav = (props: Props) => {
     >
       <Container justifyContent='space-between' alignItems='center'>
         <Flex alignItems='center'>
-          <Button variant='unstyled' display='flex' alignItems='center'>
-            <Flex w='42px' h='35px'>
-              <SVG src='/svg/logo.svg' />
-            </Flex>
-            <Text ml='0.5rem' fontWeight='bold' fontSize='lg'>
-              Salty
-            </Text>
-          </Button>
+          <Link to='/'>
+            <Button variant='unstyled' display='flex' alignItems='center'>
+              <Flex w='42px' h='35px'>
+                <SVG src='/svg/logo.svg' />
+              </Flex>
+              <Text ml='0.5rem' fontWeight='bold' fontSize='lg'>
+                Salty
+              </Text>
+            </Button>
+          </Link>
+
           {!isMobileOrTablet && (
             <Flex ml='3rem'>
               <NavLink title={'Home'} href={'/'} />
@@ -87,26 +119,94 @@ const Nav = (props: Props) => {
             />
           </Button>
         ) : (
-          <Button
-            _hover={{
-              background: 'rgba(246, 111, 77,10%)',
-            }}
-            variant='unstyled'
-            color='#F66F4D'
-            display='flex'
-            alignItems='center'
-            padding='0.75rem 2rem'
-            h='auto'
-            border='1.5px solid #F66F4D'
-            borderRadius='2rem'
-          >
-            <Text fontWeight={500} fontSize='medium'>
-              Book Now
-            </Text>
-            <Flex w='16px' h='15px' ml='0.5rem'>
-              <SVG fill='#F66F4D' src='/svg/paper_flight.svg' />
-            </Flex>
-          </Button>
+          <Flex alignItems='center'>
+            <Button
+              _hover={{
+                background: 'rgba(246, 111, 77,10%)',
+              }}
+              variant='unstyled'
+              color='#F66F4D'
+              display='flex'
+              alignItems='center'
+              padding='0.75rem 2rem'
+              h='auto'
+              border='1.5px solid #F66F4D'
+              borderRadius='2rem'
+            >
+              <Text fontWeight={500} fontSize='medium'>
+                Book Now
+              </Text>
+              <Flex w='16px' h='15px' ml='0.5rem'>
+                <SVG fill='#F66F4D' src='/svg/paper_flight.svg' />
+              </Flex>
+            </Button>
+            {user._id ? (
+              <Popover isOpen={isPopoverOpen} onClose={onPopoverClose}>
+                <PopoverTrigger>
+                  <Button variant='unstyled' h='auto' onClick={onPopoverToggle}>
+                    <Avatar
+                      ml='1rem'
+                      name={user?.displayName}
+                      src={user?.info?.avatar}
+                    />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent maxW='120px'>
+                  <Flex direction='column'>
+                    <Link to='/profile'>
+                      <Button
+                        w='full'
+                        variant='unstyled'
+                        onClick={onPopoverToggle}
+                      >
+                        Your Profile
+                      </Button>
+                    </Link>
+                    <Button variant='unstyled' onClick={() => handleLogout()}>
+                      Log out
+                    </Button>
+                  </Flex>
+                </PopoverContent>
+              </Popover>
+            ) : (
+              <Flex alignItems='center' ml='1rem'>
+                <Link to='/login'>
+                  <Button
+                    _hover={{
+                      background: 'rgba(246, 111, 77,10%)',
+                    }}
+                    variant='unstyled'
+                    color='#F66F4D'
+                    display='flex'
+                    alignItems='center'
+                    padding='0.75rem 1rem'
+                    h='auto'
+                    borderRadius='0.25rem'
+                  >
+                    Sign in
+                  </Button>
+                </Link>
+                <Link to='/signup'>
+                  <Button
+                    ml='1rem'
+                    _hover={{
+                      background: 'rgba(246, 111, 77,10%)',
+                    }}
+                    variant='unstyled'
+                    color='#F66F4D'
+                    display='flex'
+                    alignItems='center'
+                    padding='0.75rem 1rem'
+                    h='auto'
+                    border='1.5px solid #F66F4D'
+                    borderRadius='0.25rem'
+                  >
+                    Sign up
+                  </Button>
+                </Link>
+              </Flex>
+            )}
+          </Flex>
         )}
         <Drawer
           isOpen={isOpen}

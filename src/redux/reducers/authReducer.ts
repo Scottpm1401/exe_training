@@ -23,6 +23,7 @@ export const { actions, reducer } = createSlice({
       state.refreshToken = action.payload.refreshToken;
       state.expiredDate = action.payload.expiredDate;
     },
+    reset: () => initialState,
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
   },

@@ -10,7 +10,6 @@ const Section1 = ({ ...props }: Props) => {
   const { isMobileOrTablet, is2XLScreen, is3XLScreen } = useResponsive();
   return (
     <Flex
-      id='section1'
       direction={isMobileOrTablet ? 'column' : 'row'}
       alignItems='center'
       justifyContent='space-between'

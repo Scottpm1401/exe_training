@@ -1,8 +1,8 @@
 /*********************TYPE & INTERFACE*****************************/
 
 export enum Gender {
-  Male = 'MALE',
-  Female = 'FEMALE',
+  male = 'MALE',
+  female = 'FEMALE',
   other = 'OTHER',
 }
 
@@ -28,7 +28,6 @@ export type UserType = {
   displayName?: string;
   email: string;
   username: string;
-  password: string;
   role: 'ADMIN' | 'USER';
   birthday: string;
   info?: UserInfoType;

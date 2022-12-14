@@ -9,13 +9,13 @@ type Props = {} & FlexProps;
 
 const AuthProvide = ({ children, ...props }: Props) => {
   const dispatch = useAppDispatch();
+
   const authorizeUser = useCallback(async () => {
     const user = await getProfile();
     if (user) dispatch(actions.user.setUser(user));
   }, [dispatch]);
-  useEffect(() => {
-    authorizeUser();
-  }, [authorizeUser]);
+
+  authorizeUser();
 
   return (
     <Flex direction='column' w='full' h='full' {...props}>

@@ -36,6 +36,8 @@ export type UpdateSelfUserRequest = {
   info?: UserInfoType;
 };
 
+export type UpdateSelfUserResponse = {};
+
 export type RefreshTokenRequesst = {
   refreshToken: string;
 };
@@ -44,4 +46,12 @@ export type LoginResponse = {
   accessToken: string;
   expiredDate: string;
   refreshToken: string;
+};
+
+export type LogoutResquest = {
+  refreshToken: string;
+};
+
+export type LogoutResponse = {
+  success: boolean;
 };

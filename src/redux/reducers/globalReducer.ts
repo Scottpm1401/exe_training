@@ -1,7 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { UserType } from '../../models/user';
-
 export type GlobalState = {};
 // Initial state
 const initialState: GlobalState = {};

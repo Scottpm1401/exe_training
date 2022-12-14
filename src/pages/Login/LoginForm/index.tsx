@@ -1,7 +1,7 @@
 import { Button, Flex, Input, Link, Text } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import React from 'react';
-import { Link as ReactLink } from 'react-router-dom';
+import { Link as ReactLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { LoginRequest } from '../../../models/api/user';
@@ -24,6 +24,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const handleLogin = async (values: LoginFormType) => {
     const { userinput, password } = values;
@@ -40,6 +41,7 @@ const LoginForm = () => {
     dispatch(actions.auth.setAuth(data));
     const userProfile = await getProfile();
     dispatch(actions.user.setUser(userProfile));
+    navigate('/');
   };
 
   return (
