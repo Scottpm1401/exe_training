@@ -2,7 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 import { API } from '../api';
-import { actions } from '../redux/reducers';
+import { actions } from '../redux/reducer';
 import { AuthState } from '../redux/reducers/authReducer';
 import { store } from '../redux/store';
 

@@ -2,7 +2,7 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import { persistStore } from 'redux-persist';
 
-import { reducer } from './reducers';
+import { reducer } from './reducer';
 
 export const store = configureStore({
   reducer,

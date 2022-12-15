@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 
 import CustomDatePicker from '../../../components/CustomeDatePicker';
 import { useAppDispatch } from '../../../redux/hooks';
-import { actions } from '../../../redux/reducers';
+import { actions } from '../../../redux/reducer';
 import { signup } from '../../../services/auth';
 import { getProfile } from '../../../services/user';
 

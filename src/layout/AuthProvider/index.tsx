@@ -2,7 +2,7 @@ import { Flex, FlexProps } from '@chakra-ui/react';
 import React, { useCallback, useEffect } from 'react';
 
 import { useAppDispatch } from '../../redux/hooks';
-import { actions } from '../../redux/reducers';
+import { actions } from '../../redux/reducer';
 import { getProfile } from '../../services/user';
 
 type Props = {} & FlexProps;

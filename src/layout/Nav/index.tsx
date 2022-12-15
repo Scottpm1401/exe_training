@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 import SocialIcon from '../../components/SocialIcon';
 import { useResponsive } from '../../hooks/useResponsive';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { actions, selectors } from '../../redux/reducers';
+import { actions, selectors } from '../../redux/reducer';
 import { logout } from '../../services/auth';
 import Container from '../Container';
 import NavLink from './NavLink';

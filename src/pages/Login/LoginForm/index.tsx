@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 
 import { LoginRequest } from '../../../models/api/user';
 import { useAppDispatch } from '../../../redux/hooks';
-import { actions } from '../../../redux/reducers';
+import { actions } from '../../../redux/reducer';
 import { login } from '../../../services/auth';
 import { getProfile } from '../../../services/user';
 import { validateEmail } from '../../../utils/common';

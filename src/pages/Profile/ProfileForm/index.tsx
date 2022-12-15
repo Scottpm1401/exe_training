@@ -9,6 +9,7 @@ import {
   Input,
   Select,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import moment from 'moment';
@@ -19,7 +20,7 @@ import CustomDatePicker from '../../../components/CustomeDatePicker';
 import { country } from '../../../const/country';
 import { Gender, UserInfoType } from '../../../models/user';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { actions, selectors } from '../../../redux/reducers';
+import { actions, selectors } from '../../../redux/reducer';
 import { updateUser } from '../../../services/user';
 
 type ProfileFormType = {
@@ -37,6 +38,7 @@ const ProfileSchema = Yup.object().shape({
 
 const ProfileForm = () => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const user = useAppSelector(selectors.user.selectUser);
   const handleUpdate = async (values: ProfileFormType) => {
     const data = await updateUser({
@@ -45,6 +47,13 @@ const ProfileForm = () => {
     });
     if (data) {
       dispatch(actions.user.setUser(data));
+      toast({
+        title: 'Update Profile Success',
+        status: 'success',
+        isClosable: true,
+        duration: 3000,
+        position: 'top-right',
+      });
     }
   };
 
@@ -52,7 +61,7 @@ const ProfileForm = () => {
     () => ({
       displayName: user.displayName,
       username: user.username,
-      birthday: moment(user.birthday).toDate(),
+      birthday: user.birthday ? moment(user.birthday).toDate() : null,
       info: user.info,
     }),
     [user]
@@ -72,6 +81,7 @@ const ProfileForm = () => {
         validationSchema={ProfileSchema}
         initialValues={initValue}
         onSubmit={handleUpdate}
+        enableReinitialize
       >
         {({
           handleSubmit,
@@ -161,7 +171,7 @@ const ProfileForm = () => {
                       <Text>Gender</Text>
                       <Select
                         mt='0.5rem'
-                        value={values.info?.sex}
+                        value={values.info?.sex || Gender.other}
                         onChange={handleChange('info.sex')}
                       >
                         <option value={Gender.male}>Male</option>
@@ -173,11 +183,13 @@ const ProfileForm = () => {
                       <Text>Country</Text>
                       <Select
                         mt='0.5rem'
-                        value={values.info?.address.country}
+                        value={values.info?.address.country || 'US'}
                         onChange={handleChange('info.address.country')}
                       >
                         {country.map((item, index) => (
-                          <option value={item.code}>{item.name}</option>
+                          <option value={item.code} key={item.code}>
+                            {item.name}
+                          </option>
                         ))}
                       </Select>
                     </Flex>

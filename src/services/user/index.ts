@@ -9,6 +9,6 @@ export const getProfile = async () => {
 };
 
 export const updateUser = async (body: UpdateSelfUserRequest) => {
-  const res = await axiosClient.post(API.USER.UPDATESELF, body);
+  const res = await axiosClient.patch(API.USER.UPDATESELF, body);
   return res.data as UserType;
 };
